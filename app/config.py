@@ -1,0 +1,3 @@
+RENDER_DPI: int = 150
+INITIAL_SYNC_PAGES: int = 3
+LOADER_YIELD_MS: int = 0
