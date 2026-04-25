@@ -7,6 +7,22 @@ A simple PDF manga viewer built with PyQt6 and PyMuPDF.
 
 ## 日本語
 
+### 既存アプリとの違い
+
+| | PDF Manga Viewer | Adobe / Foxit | SumatraPDF | ブラウザ内蔵 |
+|--|:--:|:--:|:--:|:--:|
+| 漫画向けシンプル UI | ✅ | ❌ 機能過多 | △ | ❌ |
+| 画像 PDF を自動判定して起動振り分け | ✅ | ❌ | ❌ | ❌ |
+| バックグラウンド先読みキャッシュ | ✅ | ✅ | ✅ | ❌ |
+| HiDPI / 4K レンダリング | ✅ | ✅ | △ | △ |
+| ホイールでページめくり | ✅ | ❌ スクロール | ✅ | ❌ |
+| インストール不要（pip のみ） | ✅ | ❌ | ❌ | ➖ 標準搭載 |
+| 広告・サブスク不要 | ✅ | △ 無料版は広告あり | ✅ | ✅ |
+
+**ポイント：自動振り分け機能**
+
+起動時に PDF の内容を解析し（先頭 3 ページの平均文字数で判定）、スキャン漫画なら本アプリで表示、テキスト中心の PDF なら PC にインストール済みの外部リーダーへ自動転送します。ファイルの関連付けをこのアプリ 1 本にまとめられるのが最大の差異点です。
+
 ### 機能
 
 - PDF ファイルを開く（メニュー・`Ctrl+O`・ドラッグ＆ドロップ）
@@ -61,6 +77,22 @@ python main.py path/to/manga.pdf
 ---
 
 ## English
+
+### How It Differs from Existing Apps
+
+| | PDF Manga Viewer | Adobe / Foxit | SumatraPDF | Browser built-in |
+|--|:--:|:--:|:--:|:--:|
+| Manga-focused minimal UI | ✅ | ❌ feature-heavy | △ | ❌ |
+| Auto-detects image vs text PDF and routes accordingly | ✅ | ❌ | ❌ | ❌ |
+| Background page pre-loading cache | ✅ | ✅ | ✅ | ❌ |
+| HiDPI / 4K rendering | ✅ | ✅ | △ | △ |
+| Mouse wheel to flip pages (not scroll) | ✅ | ❌ scrolls | ✅ | ❌ |
+| No installer required (pip only) | ✅ | ❌ | ❌ | ➖ built-in |
+| No ads or subscription | ✅ | △ free ver. has ads | ✅ | ✅ |
+
+**Key differentiator: automatic PDF routing**
+
+On launch, the app inspects the PDF (average character count over the first 3 pages) and decides: if it looks like scanned manga it opens natively, otherwise it hands the file off to whichever PDF reader is already installed on your PC (detected via the Windows registry). This means you can set this app as the single default handler for all `.pdf` files and never manually choose which reader to use.
 
 ### Features
 
