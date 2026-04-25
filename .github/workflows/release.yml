@@ -1,0 +1,43 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: Build executable
+        run: pyinstaller MangaReader.spec
+
+      - name: Create zip archive
+        run: Compress-Archive -Path dist\MangaReader.exe -DestinationPath dist\MangaReader-${{ github.ref_name }}-windows-x64.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "MangaReader ${{ github.ref_name }}"
+          body: |
+            ## ダウンロード / Download
+
+            `MangaReader-${{ github.ref_name }}-windows-x64.zip` を展開して `MangaReader.exe` を実行してください。
+            Extract `MangaReader-${{ github.ref_name }}-windows-x64.zip` and run `MangaReader.exe`. No installation required.
+
+            ## 動作環境 / Requirements
+            - Windows 10 / 11 (x64)
+          files: dist/MangaReader-${{ github.ref_name }}-windows-x64.zip
